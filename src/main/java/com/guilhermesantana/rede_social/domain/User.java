@@ -1,7 +1,10 @@
 package com.guilhermesantana.rede_social.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.guilhermesantana.rede_social.dtos.UserDto;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -10,27 +13,36 @@ import java.util.UUID;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     private String name;
 
     private String cpf;
 
-    private LocalDateTime date;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate date;
 
     private String email;
 
     private String password;
 
-    public User() {
-    }
+    public User() {}
 
-    public User(String name, String cpf, LocalDateTime date, String email) {
+    public User(String name, String cpf, LocalDate date, String email, String password) {
         this.name = name;
         this.cpf = cpf;
         this.date = date;
         this.email = email;
+        this.password = password;
+    }
+
+    public User(UserDto data){
+        this.name = data.name();
+        this.cpf = data.cpf();
+        this.date = data.date();
+        this.email = data.email();
+        this.password = data.password();
     }
 
     public UUID getId() {
@@ -57,11 +69,11 @@ public class User {
         this.cpf = cpf;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
