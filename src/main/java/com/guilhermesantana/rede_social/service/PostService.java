@@ -9,6 +9,7 @@ import com.guilhermesantana.rede_social.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -32,5 +33,10 @@ public class PostService {
         newPost.setDate(LocalDateTime.now());
         this.postRepository.save(newPost);
         return newPost;
+    }
+
+    public List<Post> findAll(){
+        List<Post> listPost = this.postRepository.findAll();
+        return listPost;
     }
 }
