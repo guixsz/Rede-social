@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -24,4 +25,11 @@ public class PostController {
         Post newPost = this.postService.createPost(id, data);
         return new ResponseEntity<>(newPost, HttpStatus.CREATED);
     }
+
+    @GetMapping
+    public ResponseEntity<List<Post>> findAll(){
+        List<Post> listPost = this.postService.findAll();
+        return new ResponseEntity<>(listPost, HttpStatus.OK);
+    }
+
 }
