@@ -1,11 +1,13 @@
 package com.guilhermesantana.rede_social.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.guilhermesantana.rede_social.dtos.UserDto;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -26,6 +28,12 @@ public class User {
     private String email;
 
     private String password;
+
+    private Integer postsNumbers;
+
+    @OneToMany(mappedBy = "user")
+    @JsonManagedReference
+    private List<Post> post = new ArrayList<>();
 
     public User() {}
 
@@ -91,5 +99,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Integer getPostsNumbers() {
+        return postsNumbers;
+    }
+
+    public void setPostsNumbers(Integer postsNumbers) {
+        this.postsNumbers = postsNumbers;
+    }
+
+    public List<Post> getPost() {
+        return post;
+    }
+
+    public void setPost(List<Post> post) {
+        this.post = post;
     }
 }

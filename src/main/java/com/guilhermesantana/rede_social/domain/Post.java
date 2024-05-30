@@ -1,6 +1,6 @@
 package com.guilhermesantana.rede_social.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.guilhermesantana.rede_social.dtos.PostDto;
 import jakarta.persistence.*;
 
@@ -20,6 +20,7 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(name = "id_user")
+    @JsonBackReference
     private User user;
 
     public Post() {

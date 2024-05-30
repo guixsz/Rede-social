@@ -28,6 +28,7 @@ public class PostService {
     public Post createPost(UUID id, PostDto data) throws Exception{
         User user = this.userRepository.findUserById(id).orElseThrow(() -> new Exception("Usuário não encontrado"));
 
+        user.setPostsNumbers(user.getPost().size() + 1);
         Post newPost = new Post(data);
         newPost.setUser(user);
         newPost.setDate(LocalDateTime.now());
