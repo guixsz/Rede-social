@@ -32,4 +32,10 @@ public class PostController {
         return new ResponseEntity<>(listPost, HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<List<Post>> findPostsByUserId(@PathVariable("id") UUID id) throws Exception{
+        List<Post> listPost = this.postService.findPostsById(id);
+        return new ResponseEntity<>(listPost, HttpStatus.OK);
+    }
+
 }
