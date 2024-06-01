@@ -40,4 +40,9 @@ public class PostService {
         List<Post> listPost = this.postRepository.findAll();
         return listPost;
     }
+
+    public List<Post> findPostsById(UUID id) throws Exception{
+        List<Post> postList = postRepository.findPostsByUserId(id).orElseThrow(() -> new Exception("Postagens não existentes"));
+        return postList;
+    }
 }
