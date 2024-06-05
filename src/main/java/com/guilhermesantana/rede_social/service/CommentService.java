@@ -51,4 +51,13 @@ public class CommentService {
         List<CommentDto> dtoList = this.commentRepository.findAllComments();
         return dtoList;
     }
+
+    public CommentDto findCommentById(UUID id) throws Exception{
+        Comment comment = this.commentRepository.findCommentById(id).orElseThrow(() -> new Exception("Comentário não encontrado"));
+
+        UUID postId = comment.getPost().getId();
+        UUID userId = comment.getUser().getId();
+
+        return new CommentDto(comment.getId(), comment.getDate(), comment.getContent(), userId, postId);
+    }
 }
