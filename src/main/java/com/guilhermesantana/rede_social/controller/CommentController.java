@@ -26,8 +26,8 @@ public class CommentController {
         return new ResponseEntity<>(newComment, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<List<Comment>> findCommentByUserId(@PathVariable("id") UUID id) throws Exception{
+    @GetMapping("/user/{userid}")
+    public ResponseEntity<List<Comment>> findCommentByUserId(@PathVariable("userid") UUID id) throws Exception{
         List<Comment> commentList = this.commentService.findCommentByUserId(id);
         return new ResponseEntity<>(commentList, HttpStatus.OK);
     }
@@ -36,5 +36,11 @@ public class CommentController {
     public ResponseEntity<List<CommentDto>> findAll() throws Exception{
         List<CommentDto> commentList = this.commentService.findAll();
         return new ResponseEntity<>(commentList, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CommentDto> findCommentById(@PathVariable("id") UUID id) throws Exception{
+        CommentDto commentDto = this.commentService.findCommentById(id);
+        return new ResponseEntity<>(commentDto, HttpStatus.OK);
     }
 }
