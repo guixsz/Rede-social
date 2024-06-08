@@ -3,6 +3,7 @@ package com.guilhermesantana.rede_social.service;
 import com.guilhermesantana.rede_social.domain.User;
 import com.guilhermesantana.rede_social.dtos.UserDto;
 import com.guilhermesantana.rede_social.repositories.UserRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,14 +12,18 @@ import java.util.UUID;
 @Service
 public class UserService {
 
-    private final UserRepository userRepository;
+    private UserRepository userRepository;
 
-    public UserService(UserRepository userRepository){
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder){
         this.userRepository = userRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     public User createUser(UserDto data){
         User newUser = new User(data);
+        newUser.setPassword(this.bCryptPasswordEncoder.encode(newUser.getPassword()));
         this.userRepository.save(newUser);
         return newUser;
     }
