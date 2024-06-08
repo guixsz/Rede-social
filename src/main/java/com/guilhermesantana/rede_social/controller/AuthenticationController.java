@@ -1,5 +1,6 @@
 package com.guilhermesantana.rede_social.controller;
 
+import com.guilhermesantana.rede_social.domain.User;
 import com.guilhermesantana.rede_social.domain.UserSecurity.UserSecurity;
 import com.guilhermesantana.rede_social.dtos.AuthenticationDto;
 import com.guilhermesantana.rede_social.dtos.LoginResponseDto;
@@ -14,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

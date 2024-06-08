@@ -1,6 +1,7 @@
 package com.guilhermesantana.rede_social.service;
 
 import com.guilhermesantana.rede_social.repositories.UserRepository;
+import com.guilhermesantana.rede_social.repositories.UserSecurityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,10 +12,10 @@ import org.springframework.stereotype.Service;
 public class AuthorizationService implements UserDetailsService {
 
     @Autowired
-    UserRepository repository;
+    UserSecurityRepository repository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+        return repository.findByLogin(username);
     }
 }
